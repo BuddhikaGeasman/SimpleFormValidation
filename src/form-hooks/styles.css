@@ -1,0 +1,10 @@
+.formfields {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.formfields input[type="text"] {
+  padding: 0.5rem;
+  width: 75%;
+}

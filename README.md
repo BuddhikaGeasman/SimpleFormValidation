@@ -1,2 +1,0 @@
-# SimpleFormValidation
-Created with CodeSandbox
