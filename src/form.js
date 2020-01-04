@@ -34,6 +34,7 @@ const Form = () => {
   }, [firstName, lastName, addressOne]);
 
   //TODO: usecallback function
+  //TODO: mobile site, update with one useState
 
   return (
     <form
