@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Crimson+Pro:300&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Crimson+Pro:300&display=swap');
 
 * {
   padding: 0;
@@ -9,7 +9,7 @@
 html,
 body {
   height: 100%;
-  font-family: "Crimson Pro", serif;
+  font-family: 'Crimson Pro', serif;
   color: #1e1e1e;
 }
 
@@ -20,7 +20,7 @@ body {
 
 .intro {
   background-color: #9fb6ba;
-  background-image: url("https://images.unsplash.com/photo-1571942347102-23df2d0ee3a2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1868&q=80");
+  background-image: url('https://images.unsplash.com/photo-1571942347102-23df2d0ee3a2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1868&q=80');
   background-size: cover;
   flex: 1 0 50%;
   display: flex;
@@ -57,4 +57,28 @@ h1 {
 .actionButton:disabled {
   cursor: not-allowed;
   background-color: grey;
+}
+
+.formfields {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.formfields input[type='text'] {
+  padding: 0.5rem;
+  width: 75%;
+  margin: 0.25rem 0;
+}
+
+.error {
+  color: brown;
+}
+
+.error > input[type='text'] {
+  border: 1px solid brown;
+}
+
+.error > label {
+  color: #1e1e1e;
 }

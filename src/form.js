@@ -1,98 +1,70 @@
-import React, { useState, useEffect, useCallback } from "react";
-import "./styles.css";
-import useFormInputField from "./form-hooks/useFormInputField";
-import { validateInputFields } from "./helpers";
+import React from 'react';
+import { validateFormData } from './helpers';
+import useForm from './FormHooks/useForm';
+import clsx from 'clsx';
+
+import './styles.css';
 
 const Form = () => {
-  // const [firstName, FirstNameField] = useFormInputField("First Name", "", {
-  //   required: true
-  // });
-  const [firstName, updateFirstName] = useState("");
-  const [lastName, updateLastName] = useState("");
-  const [addressOne, updateAddressOne] = useState("");
-  const [addressTwo, updateAddressTwo] = useState("");
-  // const [lastName, LastNameField] = useFormInputField("Last Name", "", {
-  //   required: true
-  // });
-  // const [addressOne, AddressOneField] = useFormInputField("Address", "", {
-  //   required: true
-  // });
-  // const [addressTwo, AddressTwoField] = useFormInputField(
-  //   "Address 2 (Optional)",
-  //   ""
-  // );
-  const [disable, setDisable] = useState(false);
+  const [formData, onHandleChange, onHandleSubmit, errors] = useForm(
+    validateFormData
+  );
 
-  useEffect(() => {
-    const { isValid } = validateInputFields({
-      firstName,
-      lastName,
-      addressOne
-    });
+  const { firstName, lastName, addressOne, addressTwo } = formData;
 
-    setDisable(!isValid);
-  }, [firstName, lastName, addressOne]);
-
-  //TODO: usecallback function
-  //TODO: mobile site, update with one useState
-
+  console.log('form errors', errors);
   return (
-    <form
-      className="form"
-      onSubmit={e => {
-        e.preventDefault();
-        alert(`
-        Name: ${firstName} ${lastName},
-        Address: ${addressOne} ${addressTwo}
-        `);
-      }}
-    >
-      {/* <FirstNameField /> */}
-      <div className="formfields">
-        <label htmlFor="firstName">First Name</label>
+    <form className='form' onSubmit={onHandleSubmit}>
+      <div className={clsx('formfields', { error: errors.firstName })}>
+        <label htmlFor='firstName'>First Name</label>
         <input
-          type="text"
-          id={firstName}
+          type='text'
+          name='firstName'
+          id='firstName'
           value={firstName}
           required
-          onChange={e => updateFirstName(e.target.value)}
+          onChange={onHandleChange}
         />
+        {errors.firstName && <span className='error'>{errors.firstName}</span>}
       </div>
-      <div className="formfields">
-        <label htmlFor="lastName">Last Name</label>
+
+      <div className={clsx('formfields', { error: errors.lastName })}>
+        <label htmlFor='lastName'>Last Name</label>
         <input
-          type="text"
-          id={lastName}
+          type='text'
+          name='lastName'
+          id='lastName'
           value={lastName}
           required
-          onChange={e => updateLastName(e.target.value)}
+          onChange={onHandleChange}
         />
+        {errors.lastName && <span className='error'>{errors.lastName}</span>}
       </div>
-      <div className="formfields">
-        <label htmlFor="addressOne">Address One</label>
+      <div className={clsx('formfields', { error: errors.addressOne })}>
+        <label htmlFor='addressOne'>Address One</label>
         <input
-          type="text"
-          id={addressOne}
+          type='text'
+          id='addressOne'
           value={addressOne}
           required
-          onChange={e => updateAddressOne(e.target.value)}
+          name='addressOne'
+          onChange={onHandleChange}
         />
+        {errors.addressOne && (
+          <span className='error'>{errors.addressOne}</span>
+        )}
       </div>
-      <div className="formfields">
-        <label htmlFor="addressTwo">Address Two</label>
+      <div className='formfields'>
+        <label htmlFor='addressTwo'>Address Two</label>
         <input
-          type="text"
-          id={addressTwo}
+          type='text'
+          id='addressTwo'
           value={addressTwo}
-          onChange={e => updateAddressTwo(e.target.value)}
+          name='addressTwo'
+          onChange={onHandleChange}
         />
       </div>
-      {/* <LastNameField />
-      <AddressOneField />
-      <AddressTwoField /> */}
-      <button className="actionButton" disabled={disable}>
-        Next
-      </button>
+      <button className='actionButton'>Next</button>
     </form>
   );
 };
